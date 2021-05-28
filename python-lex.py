@@ -1,8 +1,19 @@
 # ------------------------------------------------------------
-# calclex.py
+# Trabalho 01 - Peso 0.5
 #
-# tokenizer for a simple expression evaluator for
-# numbers and +,-,*,/
+# https://www.dabeaz.com/ply/ply.html#ply_nn4
+# https://stackoverflow.com/questions/34594597/create-c-parser-with-ply
+#
+# Apresente a Gramática e os analisadores léxicos e sintáticos para o reconhecimento de
+# declaração de variáveis no estilo da Linguagem C (leia com atenção as especificações abaixo,
+# não deve ser implementado nem mais, nem menos).
+#
+# - Devem reconhecer os tipos: char – int – float
+# - O char pode ser um caractere ou uma cadeia.
+# - As variáveis são apenas declaradas, não sendo possível inicializar
+# - Identificadores: de acordo com as regras da Linguagem C
+# - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas).
+# - A finalização de cada declaração será por ponto-e-vírgula (;).
 # ------------------------------------------------------------
 import ply.lex as lex
 
@@ -23,6 +34,7 @@ reserved = {
     'then' : 'THEN',
     'else' : 'ELSE',
     'while' : 'WHILE',
+    'do' : 'DO'
 }
 
 # Regular expression rules for simple tokens
