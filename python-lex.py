@@ -6,7 +6,7 @@
 # ------------------------------------------------------------
 import ply.lex as lex
 
-# List of token names.   This is always required
+# Lista do nome dos tokens   This is always required
 tokens = (
     'NUMBER',
     'PLUS',
@@ -16,6 +16,14 @@ tokens = (
     'LPAREN',
     'RPAREN',
 )
+
+# Palavras reservadas
+reserved = {
+    'if' : 'IF',
+    'then' : 'THEN',
+    'else' : 'ELSE',
+    'while' : 'WHILE',
+}
 
 # Regular expression rules for simple tokens
 t_PLUS    = r'\+'
