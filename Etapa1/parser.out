@@ -1,0 +1,182 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> sequence_declaration
+Rule 2     sequence_declaration -> declaration sequence_declaration
+Rule 3     sequence_declaration -> declaration
+Rule 4     declaration -> type variavel define_end_of_instruction
+Rule 5     type -> INT
+Rule 6     type -> FLOAT
+Rule 7     type -> CHAR
+Rule 8     variavel -> ID
+Rule 9     variavel -> ID COMMA variavel
+Rule 10    define_end_of_instruction -> SEMICOLON
+
+Terminals, with rules where they appear
+
+CHAR                 : 7
+COMMA                : 9
+FLOAT                : 6
+ID                   : 8 9
+INT                  : 5
+SEMICOLON            : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 2 3
+define_end_of_instruction : 4
+program              : 0
+sequence_declaration : 1 2
+type                 : 4
+variavel             : 4 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . sequence_declaration
+    (2) sequence_declaration -> . declaration sequence_declaration
+    (3) sequence_declaration -> . declaration
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) type -> . INT
+    (6) type -> . FLOAT
+    (7) type -> . CHAR
+
+    INT             shift and go to state 5
+    FLOAT           shift and go to state 6
+    CHAR            shift and go to state 7
+
+    program                        shift and go to state 1
+    sequence_declaration           shift and go to state 2
+    declaration                    shift and go to state 3
+    type                           shift and go to state 4
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> sequence_declaration .
+
+    $end            reduce using rule 1 (program -> sequence_declaration .)
+
+
+state 3
+
+    (2) sequence_declaration -> declaration . sequence_declaration
+    (3) sequence_declaration -> declaration .
+    (2) sequence_declaration -> . declaration sequence_declaration
+    (3) sequence_declaration -> . declaration
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) type -> . INT
+    (6) type -> . FLOAT
+    (7) type -> . CHAR
+
+    $end            reduce using rule 3 (sequence_declaration -> declaration .)
+    INT             shift and go to state 5
+    FLOAT           shift and go to state 6
+    CHAR            shift and go to state 7
+
+    declaration                    shift and go to state 3
+    sequence_declaration           shift and go to state 8
+    type                           shift and go to state 4
+
+state 4
+
+    (4) declaration -> type . variavel define_end_of_instruction
+    (8) variavel -> . ID
+    (9) variavel -> . ID COMMA variavel
+
+    ID              shift and go to state 10
+
+    variavel                       shift and go to state 9
+
+state 5
+
+    (5) type -> INT .
+
+    ID              reduce using rule 5 (type -> INT .)
+
+
+state 6
+
+    (6) type -> FLOAT .
+
+    ID              reduce using rule 6 (type -> FLOAT .)
+
+
+state 7
+
+    (7) type -> CHAR .
+
+    ID              reduce using rule 7 (type -> CHAR .)
+
+
+state 8
+
+    (2) sequence_declaration -> declaration sequence_declaration .
+
+    $end            reduce using rule 2 (sequence_declaration -> declaration sequence_declaration .)
+
+
+state 9
+
+    (4) declaration -> type variavel . define_end_of_instruction
+    (10) define_end_of_instruction -> . SEMICOLON
+
+    SEMICOLON       shift and go to state 12
+
+    define_end_of_instruction      shift and go to state 11
+
+state 10
+
+    (8) variavel -> ID .
+    (9) variavel -> ID . COMMA variavel
+
+    SEMICOLON       reduce using rule 8 (variavel -> ID .)
+    COMMA           shift and go to state 13
+
+
+state 11
+
+    (4) declaration -> type variavel define_end_of_instruction .
+
+    INT             reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
+    FLOAT           reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
+    CHAR            reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
+    $end            reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
+
+
+state 12
+
+    (10) define_end_of_instruction -> SEMICOLON .
+
+    INT             reduce using rule 10 (define_end_of_instruction -> SEMICOLON .)
+    FLOAT           reduce using rule 10 (define_end_of_instruction -> SEMICOLON .)
+    CHAR            reduce using rule 10 (define_end_of_instruction -> SEMICOLON .)
+    $end            reduce using rule 10 (define_end_of_instruction -> SEMICOLON .)
+
+
+state 13
+
+    (9) variavel -> ID COMMA . variavel
+    (8) variavel -> . ID
+    (9) variavel -> . ID COMMA variavel
+
+    ID              shift and go to state 10
+
+    variavel                       shift and go to state 14
+
+state 14
+
+    (9) variavel -> ID COMMA variavel .
+
+    SEMICOLON       reduce using rule 9 (variavel -> ID COMMA variavel .)
+

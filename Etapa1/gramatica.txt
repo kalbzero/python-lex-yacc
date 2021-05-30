@@ -1,0 +1,15 @@
+Etapa 1
+Apresente a Gramática e os analisadores léxicos e sintáticos para o reconhecimento de
+declaração de variáveis no estilo da Linguagem C (leia com atenção as especificações abaixo,
+não deve ser implementado nem mais, nem menos).
+- Devem reconhecer os tipos: char – int – float
+- O char pode ser um caractere ou uma cadeia.
+- As variáveis são apenas declaradas, não sendo possível inicializar.
+- Identificadores: de acordo com as regras da Linguagem C (iniciam por letras ou _, depois do
+segundo caractere pode ser número, letra ou _ e o único caractere especial reconhecido é o _).
+- Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas).
+- A finalização de cada declaração será por ponto-e-vírgula (;).
+
+Data de entrega: 29/05/2021 (link: Trabalho Final - Compiladores (Etapa 1)). Essa etapa
+contará como a Atividade Semipresencial do dia 29/05/2021.
+Peso: 0.5
