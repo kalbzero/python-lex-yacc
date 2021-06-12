@@ -1,0 +1,16 @@
+Gramatica:
+- Os comandos reconhecidos serão: 'int', 'float', 'if', 'else', 'switch', 'default' e 'case'.
+- O comando 'if' deverá ter um parametro, sendo que o bloco de comando pode ser vazio. o comando 'else' é opcional, podendo ter o bloco de comando vazio.
+- Os parâmetros do 'if' serão apenas comandos matemáticos simples: soma,subtração, multiplicação e divisão.
+- O comando 'if' será aceito das seguintes formas da linguagem C. Ex: if(age > 17){ ... } ou if(age > 17){ ... } else { ... }
+- O comando 'switch' decerá ter um parametro e dentro do seu bloco de comando deverá ter, pelo menos, um 'case' e um 'default'.
+- O comando 'case' deverá ter um valor, seguido do seu bloco de comando contendo um 'break;' dentro.
+- O parâmetro do 'switch' será uma variável, não podendo ter operações matemáticas como no 'if.'
+- O comando 'switch' será aceita das seguintes formas da linguagem C. Ex: switch(op){ case 1: { ... break;} case N: { ... break;} default:{...}}
+
+- As variáveis não possuem uma regra para tamanho ou limite, ou seja, é livre (desde que não estoure a memória do computador kkkk)
+- As variaveis começam por letras ou _
+- Os tipos de variaveis reconhecidas sao: float, int e char
+- Pode declarar várias variaveis, separado elas por vírgula (Ex: int number, age, days;)
+- Nessa etapa poderá inicializar ou colocar valores dentro das variáveis, respeitando o valor declarado dos mesmos. Ex: 'int' apenas números inteiros, 'float' números inteiros ou com casas decimais e 'char' caracteres (strings).
+- A finalização de cada declaração será por ponto-e-vírgula (;)

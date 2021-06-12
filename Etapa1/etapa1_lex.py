@@ -49,6 +49,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Coloque o código a ser testado na variável 'data'
+
 #1 - reconhecer os tipos: char – int – float
 # data = '''
 # int number;
@@ -85,7 +86,6 @@ lexer = lex.lex()
 #5 - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas)
 data = '''
 char a;
-int year, month, day;
 '''
 
 # Coloque a 'data' na funcao input()

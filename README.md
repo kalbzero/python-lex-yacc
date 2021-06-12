@@ -1,5 +1,19 @@
 # python-lex-yacc
+Trabalho de Compialdores sobre criar um compilador para a linguagem C.
 
+## Executando 
+Utilizando o Visual Studio Code, instale o plugin "Code Runner".
+Para executar o arquivo python aperte Ctrl+Alt+N e para parar a execução Ctrl+Alt+M.
+Na aba "OUTPUT" terá um print de quando começa e termina a execução.
+
+## Sobre o projeto
+Quando executar o arquivo "etapaX_yacc.py", irá gerar dois arquivos chamados de "parser.out" e "parsetab.py".
+
+### Parser.out
+Este arquivo possui os estágios (stage) de cada passo a ser tomado segundo as regras ditas ao programa. Este arquivo é um "print" do que está programado no arquivo "parsetab.py".
+
+### Parsetab.py
+Este arquivo possui a configuração para gerar as regras e os passos da linguagem, este arquivo gerado não pode ser editado!
 ## Etapa 1
 Apresente a Gramática e os analisadores léxicos e sintáticos para o reconhecimento de
 declaração de variáveis no estilo da Linguagem C (leia com atenção as especificações abaixo,
@@ -30,7 +44,8 @@ dos operadores de atribuição a uma variável.
 Comando switch-case:
 - Sintaxe: switch(variável){
  case1:{<comandos> break;}
- case2: case3: {<comandos> break;}
+ case2: {<comandos> break;}
+ case3: {<comandos> break;}
  default: {<comandos>}
  }
 - Mesmas informações do comando if na questão dos comandos.
@@ -43,7 +58,7 @@ Data de entrega: 19/06/2021 (link: Trabalho Final - Compiladores (Etapa 2)). Ess
 contará como a Atividade Semipresencial do dia 19/06/2021.
 Peso: 1.0
 
-Etapa 3
+## Etapa 3
 Apresente a Gramática e os analisadores léxicos e sintáticos para o reconhecimento dos
 comandos de repetição: while e for, no estilo da Linguagem C.
 Comando while:
@@ -64,7 +79,7 @@ Comando for:
 Data de entrega: 29/06/2021 (link: Trabalho Final – Compiladores (Etapa 3)).
 Peso: 1.0
 
-Etapa 4
+## Etapa 4
 Entrega das Etapas 1, 2 e 3 agrupadas, com suas devidas funcionalidades.
 Os analisadores devem estar operacionais, ou seja, ao inserir comando, os mesmos devem
 informar as saídas léxicas e sintáticas, de acordo com cada ferramenta.

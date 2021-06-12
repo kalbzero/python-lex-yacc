@@ -1,12 +1,7 @@
 # ------------------------------------------------------------
-# Etapa 01 - Peso 0.5
-#
-# https://www.dabeaz.com/ply/ply.html#ply_nn4
-# https://stackoverflow.com/questions/34594597/create-c-parser-with-ply
-#
+# Etapa 02 - Peso 1.0
 # ------------------------------------------------------------
 import ply.lex as lex
-import ply.yacc as yacc
 
 # Lista do nome dos tokens
 tokens = (
