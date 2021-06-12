@@ -25,7 +25,7 @@ não deve ser implementado nem mais, nem menos).
 segundo caractere pode ser número, letra ou _ e o único caractere especial reconhecido é o _).
 - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas).
 - A finalização de cada declaração será por ponto-e-vírgula (;).
-Data de entrega: 29/05/2021 (link: Trabalho Final - Compiladores (Etapa 1)). Essa etapa
+- Data de entrega: 29/05/2021 (link: Trabalho Final - Compiladores (Etapa 1)). Essa etapa
 contará como a Atividade Semipresencial do dia 29/05/2021.
 Peso: 0.5
 
@@ -54,7 +54,7 @@ Comando switch-case:
 - O comando default é opcional (assim, como na linguagem C).
 * As variáveis devem seguir a Gramática apresentada na declaração de variáveis
 (identificadores).
-Data de entrega: 19/06/2021 (link: Trabalho Final - Compiladores (Etapa 2)). Essa etapa
+- Data de entrega: 19/06/2021 (link: Trabalho Final - Compiladores (Etapa 2)). Essa etapa
 contará como a Atividade Semipresencial do dia 19/06/2021.
 Peso: 1.0
 
@@ -74,9 +74,9 @@ Comando for:
 - Mesmas informações do comando while na questão dos comandos e condições.
 - A inicialização será por meio de uma atribuição.
 - A finalização de cada comando será por ponto-e-vírgula (;).
-* As variáveis devem seguir a Gramática apresentada na declaração de variáveis
+- As variáveis devem seguir a Gramática apresentada na declaração de variáveis
 (identificadores).
-Data de entrega: 29/06/2021 (link: Trabalho Final – Compiladores (Etapa 3)).
+- Data de entrega: 29/06/2021 (link: Trabalho Final – Compiladores (Etapa 3)).
 Peso: 1.0
 
 ## Etapa 4
@@ -88,6 +88,7 @@ tempo de apresentação de 15 minutos.
 Ordem de Apresentação, por inscrição, conforme planilha compartilhada com a turma:
 https://docs.google.com/spreadsheets/d/1yHCjaXkMIpDOJ9hBHsfLSw_cN6POTj1FI6WYa4F8F8
 k/edit?usp=sharing
+
 Data de entrega: 06/07/2021 (link: Trabalho Final – Compiladores (AS)).
 Peso: 3.5
 
@@ -95,3 +96,4 @@ Peso: 3.5
 - https://www.dabeaz.com/ply/ply.html#ply_nn4
 - https://stackoverflow.com/questions/34594597/create-c-parser-with-ply
 - https://pemtajo.medium.com/dicas-sobre-ply-python-lex-yacc-1c97519b41e5
+- https://github.com/pemtajo/compiler_python
