@@ -12,5 +12,5 @@ Gramatica:
 - As variaveis começam por letras ou _
 - Os tipos de variaveis reconhecidas sao: float, int e char
 - Pode declarar várias variaveis, separado elas por vírgula (Ex: int number, age, days;)
-- Nessa etapa poderá inicializar ou colocar valores dentro das variáveis, respeitando o valor declarado dos mesmos. Ex: 'int' apenas números inteiros, 'float' números inteiros ou com casas decimais e 'char' caracteres (strings).
+- Nessa etapa poderá inicializar ou colocar valores dentro das variáveis, respeitando o valor declarado dos mesmos. Ex: 'int' apenas números inteiros, 'float' números inteiros ou com até duas casas decimais e 'char' caracteres(strings) entre aspas duplas.
 - A finalização de cada declaração será por ponto-e-vírgula (;)

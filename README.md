@@ -8,6 +8,7 @@ Na aba "OUTPUT" terá um print de quando começa e termina a execução.
 
 ## Sobre o projeto
 Quando executar o arquivo "etapaX_yacc.py", irá gerar dois arquivos chamados de "parser.out" e "parsetab.py".
+Quando executar o arquivo 'etapaX_lex.py', irá mostrar os tokens na aba "OUTPUT".
 
 ### Parser.out
 Este arquivo possui os estágios (stage) de cada passo a ser tomado segundo as regras ditas ao programa. Este arquivo é um "print" do que está programado no arquivo "parsetab.py".

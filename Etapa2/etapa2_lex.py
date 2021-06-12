@@ -6,6 +6,9 @@ import ply.lex as lex
 # Lista do nome dos tokens
 tokens = (
     'ID',
+    'NUMBER',
+    'DECIMAL',
+    'NORMALSTRING',
     'INT',
     'FLOAT',
     'CHAR',
@@ -34,7 +37,12 @@ tokens = (
     'SUMEQUALS',
     'MINUSEQUALS',
     'TIMESEQUALS',
-    'DIVIDEEQUALS'
+    'DIVIDEEQUALS',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'ASSIGN'
 )
 
 # Expressões regulares dos tokens acima
@@ -67,6 +75,12 @@ t_MINUSEQUALS	= r'-='
 t_TIMESEQUALS 	= r'\*='
 t_DIVIDEEQUALS	= r'/='
 
+t_PLUS   		= r'\+'
+t_MINUS			= r'-'
+t_TIMES			= r'\*'
+t_DIVIDE		= r'/'
+t_ASSIGN		= r'='
+
 # Palavras reservadas
 reserved = {
     'int'    : 'INT',
@@ -80,7 +94,24 @@ reserved = {
     'default': 'DEFAULT',
 }
 
-# Expressão Regular para identificar ID's
+# Regra para identificar números decimais
+def t_DECIMAL(t):
+	r'\d+(\.\d{1,2})?'
+	t.value = float(t.value)
+	return t
+
+# Regra para identificar números inteiros
+def t_NUMBER(t):
+	r'\d+'
+	t.value = int(t.value)
+	return t
+
+# Regra para identificar char(strings)
+def t_NORMALSTRING(t):
+	r'\"([^\\\n]|(\\.))*?\"'
+	return t
+
+# Regra para identificar ID's (variáveis)
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value in reserved:
@@ -102,10 +133,61 @@ lexer = lex.lex()
 
 # Coloque o código a ser testado na variável 'data'
 
-#1 - reconhecer os comandos: if – else – switch
-data = '''
-if()
-'''
+#1.1 - reconhecer os comandos: if
+# data = '''
+# char name = '';
+# int option = 0;
+# if(option > 17){
+#     name = 'Bob';
+# }
+# '''
+
+#1.2 - reconhecer os comandos: if – else
+# data = '''
+# char name = '';
+# int option = 17;
+# if(option > 17){
+#     name = 'Bob';
+# } else {
+#     name = 'Jeff';
+# }
+# '''
+
+#1.3 - reconhecer o comando switch
+# data = '''
+# int option = 1;
+# float result = 0;
+
+# switch(option){
+#     case 1: {
+#         result = 1;
+#         break;
+#     }
+#     default: {
+#         result = 99;
+#     }
+# }
+# '''
+
+#1.4 - reconhecer o comando switch com mais cases
+# data = '''
+# int option = 1;
+# float result = 0;
+
+# switch(option){
+#     case 1: {
+#         result = 1;
+#         break;
+#     }
+#     case 2: {
+#         result = 2;
+#         break;
+#     }
+#     default: {
+#         result = 99;
+#     }
+# }
+# '''
 
 #2 - O char pode ser um caractere ou uma cadeia.
 # data = '''
@@ -113,7 +195,7 @@ if()
 # char name;
 # '''
 
-#3 - As variáveis são apenas declaradas, não sendo possível inicializar.
+#3 - As variáveis podem ser declaradas com seus respectivos valores.
 # data = '''
 # float age;
 # float money = 25.1;
@@ -135,7 +217,7 @@ if()
 
 #5 - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas)
 data = '''
-char a;
+float number = 2.2;
 '''
 
 # Coloque a 'data' na funcao input()
