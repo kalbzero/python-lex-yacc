@@ -96,7 +96,7 @@ reserved = {
 
 # Regra para identificar números decimais
 def t_DECIMAL(t):
-	r'\d+(\.\d{1,2})?'
+	r'\d+\.(\d{1,2})?'
 	t.value = float(t.value)
 	return t
 
@@ -195,11 +195,15 @@ lexer = lex.lex()
 # char name;
 # '''
 
-#3 - As variáveis podem ser declaradas com seus respectivos valores.
+#3.1 - As variáveis podem ser declaradas com seus respectivos valores.
 # data = '''
-# float age;
 # float money = 25.1;
 # '''
+
+#3.2 - As variáveis podem ser declaradas com seus respectivos valores.
+data = '''
+int money = 25;
+'''
 
 #4 - Identificadores: iniciam por letras ou _, depois do segundo caractere pode ser número, letra ou _ e o único caractere especial reconhecido é o _
 # data = '''
@@ -216,9 +220,9 @@ lexer = lex.lex()
 # '''
 
 #5 - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas)
-data = '''
-float number = 2.2;
-'''
+# data = '''
+# float number = 2.2;
+# '''
 
 # Coloque a 'data' na funcao input()
 lexer.input(data)
