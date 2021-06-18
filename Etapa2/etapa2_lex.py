@@ -8,7 +8,7 @@ tokens = (
     'ID',
     'NUMBER',
     'DECIMAL',
-    'NORMALSTRING',
+    'STRING',
     'INT',
     'FLOAT',
     'CHAR',
@@ -107,7 +107,7 @@ def t_NUMBER(t):
 	return t
 
 # Regra para identificar char(strings)
-def t_NORMALSTRING(t):
+def t_STRING(t):
 	r'\"([^\\\n]|(\\.))*?\"'
 	return t
 
@@ -201,8 +201,13 @@ lexer = lex.lex()
 # '''
 
 #3.2 - As variáveis podem ser declaradas com seus respectivos valores.
+# data = '''
+# int age = 25;
+# '''
+
+#3.3 - As variáveis podem ser declaradas com seus respectivos valores.
 data = '''
-int money = 25;
+char nome = "joao";
 '''
 
 #4 - Identificadores: iniciam por letras ou _, depois do segundo caractere pode ser número, letra ou _ e o único caractere especial reconhecido é o _
