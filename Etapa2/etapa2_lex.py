@@ -170,24 +170,24 @@ lexer = lex.lex()
 # '''
 
 #1.4 - reconhecer o comando switch com mais cases
-# data = '''
-# int option = 1;
-# float result = 0;
+data = '''
+int option = 1;
+float result = 0;
 
-# switch(option){
-#     case 1: {
-#         result = 1;
-#         break;
-#     }
-#     case 2: {
-#         result = 2;
-#         break;
-#     }
-#     default: {
-#         result = 99;
-#     }
-# }
-# '''
+switch(option){
+    case 1: {
+        result = 1;
+        break;
+    }
+    case 2: {
+        result = 2;
+        break;
+    }
+    default: {
+        result = 99;
+    }
+}
+'''
 
 #2 - O char pode ser um caractere ou uma cadeia.
 # data = '''
@@ -206,9 +206,9 @@ lexer = lex.lex()
 # '''
 
 #3.3 - As variáveis podem ser declaradas com seus respectivos valores.
-data = '''
-char nome = "joao";
-'''
+# data = '''
+# char nome = "joao";
+# '''
 
 #4 - Identificadores: iniciam por letras ou _, depois do segundo caractere pode ser número, letra ou _ e o único caractere especial reconhecido é o _
 # data = '''
@@ -227,6 +227,10 @@ char nome = "joao";
 #5 - Podes ser declarados individualmente ou por uma lista (sendo lista separados por vírgulas)
 # data = '''
 # float number = 2.2;
+# '''
+
+# data = '''
+# float number = 2.2, money = 25.1, height = 175.2;
 # '''
 
 # Coloque a 'data' na funcao input()

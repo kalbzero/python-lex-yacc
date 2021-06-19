@@ -3,10 +3,6 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     ASSIGN
-    BREAK
-    CASE
-    COLON
-    DEFAULT
     DIVIDE
     DIVIDEEQUALS
     EXPLAMATION
@@ -14,7 +10,6 @@ Unused terminals:
     MINUSEQUALS
     PLUS
     SUMEQUALS
-    SWITCH
     TIMES
     TIMESEQUALS
 
@@ -26,82 +21,92 @@ Rule 2     sequence_declaration -> declaration sequence_declaration
 Rule 3     sequence_declaration -> declaration
 Rule 4     declaration -> type variavel define_end_of_instruction
 Rule 5     declaration -> statement_if
-Rule 6     statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE
-Rule 7     statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
-Rule 8     expression -> condition MAIOR condition
-Rule 9     expression -> condition MENOR condition
-Rule 10    expression -> condition MAIOREQUALS condition
-Rule 11    expression -> condition MENOREQUALS condition
-Rule 12    expression -> condition EQUALS condition
-Rule 13    expression -> condition DIFF condition
-Rule 14    expression -> condition AND condition
-Rule 15    expression -> condition OR condition
-Rule 16    type -> INT
-Rule 17    type -> FLOAT
-Rule 18    type -> CHAR
-Rule 19    value -> NUMBER
-Rule 20    value -> DECIMAL
-Rule 21    value -> STRING
-Rule 22    condition -> type
-Rule 23    condition -> value
-Rule 24    variavel -> ID
-Rule 25    variavel -> ID COMMA variavel
-Rule 26    define_end_of_instruction -> SEMICOLON
+Rule 6     declaration -> statement_switch
+Rule 7     statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE
+Rule 8     statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+Rule 9     statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
+Rule 10    define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_default
+Rule 11    define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_cases
+Rule 12    define_default -> DEFAULT COLON LBRACE declaration define_break RBRACE
+Rule 13    expression -> condition MAIOR condition
+Rule 14    expression -> condition MENOR condition
+Rule 15    expression -> condition MAIOREQUALS condition
+Rule 16    expression -> condition MENOREQUALS condition
+Rule 17    expression -> condition EQUALS condition
+Rule 18    expression -> condition DIFF condition
+Rule 19    expression -> condition AND condition
+Rule 20    expression -> condition OR condition
+Rule 21    type -> INT
+Rule 22    type -> FLOAT
+Rule 23    type -> CHAR
+Rule 24    value -> NUMBER
+Rule 25    value -> DECIMAL
+Rule 26    value -> STRING
+Rule 27    condition -> type
+Rule 28    condition -> value
+Rule 29    variavel -> ID
+Rule 30    variavel -> ID COMMA variavel
+Rule 31    define_end_of_instruction -> SEMICOLON
+Rule 32    define_break -> BREAK define_end_of_instruction
 
 Terminals, with rules where they appear
 
-AND                  : 14
+AND                  : 19
 ASSIGN               : 
-BREAK                : 
-CASE                 : 
-CHAR                 : 18
-COLON                : 
-COMMA                : 25
-DECIMAL              : 20
-DEFAULT              : 
-DIFF                 : 13
+BREAK                : 32
+CASE                 : 10 11
+CHAR                 : 23
+COLON                : 10 11 12
+COMMA                : 30
+DECIMAL              : 25
+DEFAULT              : 12
+DIFF                 : 18
 DIVIDE               : 
 DIVIDEEQUALS         : 
-ELSE                 : 7
-EQUALS               : 12
+ELSE                 : 8
+EQUALS               : 17
 EXPLAMATION          : 
-FLOAT                : 17
-ID                   : 24 25
-IF                   : 6 7
-INT                  : 16
-LBRACE               : 6 7 7
-LPAREN               : 6 7
-MAIOR                : 8
-MAIOREQUALS          : 10
-MENOR                : 9
-MENOREQUALS          : 11
+FLOAT                : 22
+ID                   : 9 29 30
+IF                   : 7 8
+INT                  : 21
+LBRACE               : 7 8 8 9 10 11 12
+LPAREN               : 7 8 9
+MAIOR                : 13
+MAIOREQUALS          : 15
+MENOR                : 14
+MENOREQUALS          : 16
 MINUS                : 
 MINUSEQUALS          : 
-NUMBER               : 19
-OR                   : 15
+NUMBER               : 24
+OR                   : 20
 PLUS                 : 
-RBRACE               : 6 7 7
-RPAREN               : 6 7
-SEMICOLON            : 26
-STRING               : 21
+RBRACE               : 7 8 8 9 10 11 12
+RPAREN               : 7 8 9
+SEMICOLON            : 31
+STRING               : 26
 SUMEQUALS            : 
-SWITCH               : 
+SWITCH               : 9
 TIMES                : 
 TIMESEQUALS          : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-condition            : 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15
-declaration          : 2 3 6 7 7
-define_end_of_instruction : 4
-expression           : 6 7
+condition            : 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20
+declaration          : 2 3 7 8 8 10 11 12
+define_break         : 10 11 12
+define_cases         : 9 11
+define_default       : 9 10
+define_end_of_instruction : 4 32
+expression           : 7 8
 program              : 0
 sequence_declaration : 1 2
 statement_if         : 5
-type                 : 4 22
-value                : 23
-variavel             : 4 25
+statement_switch     : 6
+type                 : 4 27
+value                : 10 11 28
+variavel             : 4 30
 
 Parsing method: LALR
 
@@ -113,22 +118,26 @@ state 0
     (3) sequence_declaration -> . declaration
     (4) declaration -> . type variavel define_end_of_instruction
     (5) declaration -> . statement_if
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (6) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    IF              shift and go to state 9
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
 
     program                        shift and go to state 1
     sequence_declaration           shift and go to state 2
     declaration                    shift and go to state 3
     type                           shift and go to state 4
     statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
 
 state 1
 
@@ -151,32 +160,36 @@ state 3
     (3) sequence_declaration -> . declaration
     (4) declaration -> . type variavel define_end_of_instruction
     (5) declaration -> . statement_if
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (6) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
 
     $end            reduce using rule 3 (sequence_declaration -> declaration .)
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    IF              shift and go to state 9
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
 
     declaration                    shift and go to state 3
-    sequence_declaration           shift and go to state 10
+    sequence_declaration           shift and go to state 12
     type                           shift and go to state 4
     statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
 
 state 4
 
     (4) declaration -> type . variavel define_end_of_instruction
-    (24) variavel -> . ID
-    (25) variavel -> . ID COMMA variavel
+    (29) variavel -> . ID
+    (30) variavel -> . ID COMMA variavel
 
-    ID              shift and go to state 12
+    ID              shift and go to state 14
 
-    variavel                       shift and go to state 11
+    variavel                       shift and go to state 13
 
 state 5
 
@@ -186,125 +199,155 @@ state 5
     FLOAT           reduce using rule 5 (declaration -> statement_if .)
     CHAR            reduce using rule 5 (declaration -> statement_if .)
     IF              reduce using rule 5 (declaration -> statement_if .)
+    SWITCH          reduce using rule 5 (declaration -> statement_if .)
     $end            reduce using rule 5 (declaration -> statement_if .)
     RBRACE          reduce using rule 5 (declaration -> statement_if .)
+    BREAK           reduce using rule 5 (declaration -> statement_if .)
 
 
 state 6
 
-    (16) type -> INT .
+    (6) declaration -> statement_switch .
 
-    ID              reduce using rule 16 (type -> INT .)
-    MAIOR           reduce using rule 16 (type -> INT .)
-    MENOR           reduce using rule 16 (type -> INT .)
-    MAIOREQUALS     reduce using rule 16 (type -> INT .)
-    MENOREQUALS     reduce using rule 16 (type -> INT .)
-    EQUALS          reduce using rule 16 (type -> INT .)
-    DIFF            reduce using rule 16 (type -> INT .)
-    AND             reduce using rule 16 (type -> INT .)
-    OR              reduce using rule 16 (type -> INT .)
-    RPAREN          reduce using rule 16 (type -> INT .)
+    INT             reduce using rule 6 (declaration -> statement_switch .)
+    FLOAT           reduce using rule 6 (declaration -> statement_switch .)
+    CHAR            reduce using rule 6 (declaration -> statement_switch .)
+    IF              reduce using rule 6 (declaration -> statement_switch .)
+    SWITCH          reduce using rule 6 (declaration -> statement_switch .)
+    $end            reduce using rule 6 (declaration -> statement_switch .)
+    RBRACE          reduce using rule 6 (declaration -> statement_switch .)
+    BREAK           reduce using rule 6 (declaration -> statement_switch .)
 
 
 state 7
 
-    (17) type -> FLOAT .
+    (21) type -> INT .
 
-    ID              reduce using rule 17 (type -> FLOAT .)
-    MAIOR           reduce using rule 17 (type -> FLOAT .)
-    MENOR           reduce using rule 17 (type -> FLOAT .)
-    MAIOREQUALS     reduce using rule 17 (type -> FLOAT .)
-    MENOREQUALS     reduce using rule 17 (type -> FLOAT .)
-    EQUALS          reduce using rule 17 (type -> FLOAT .)
-    DIFF            reduce using rule 17 (type -> FLOAT .)
-    AND             reduce using rule 17 (type -> FLOAT .)
-    OR              reduce using rule 17 (type -> FLOAT .)
-    RPAREN          reduce using rule 17 (type -> FLOAT .)
+    ID              reduce using rule 21 (type -> INT .)
+    MAIOR           reduce using rule 21 (type -> INT .)
+    MENOR           reduce using rule 21 (type -> INT .)
+    MAIOREQUALS     reduce using rule 21 (type -> INT .)
+    MENOREQUALS     reduce using rule 21 (type -> INT .)
+    EQUALS          reduce using rule 21 (type -> INT .)
+    DIFF            reduce using rule 21 (type -> INT .)
+    AND             reduce using rule 21 (type -> INT .)
+    OR              reduce using rule 21 (type -> INT .)
+    RPAREN          reduce using rule 21 (type -> INT .)
 
 
 state 8
 
-    (18) type -> CHAR .
+    (22) type -> FLOAT .
 
-    ID              reduce using rule 18 (type -> CHAR .)
-    MAIOR           reduce using rule 18 (type -> CHAR .)
-    MENOR           reduce using rule 18 (type -> CHAR .)
-    MAIOREQUALS     reduce using rule 18 (type -> CHAR .)
-    MENOREQUALS     reduce using rule 18 (type -> CHAR .)
-    EQUALS          reduce using rule 18 (type -> CHAR .)
-    DIFF            reduce using rule 18 (type -> CHAR .)
-    AND             reduce using rule 18 (type -> CHAR .)
-    OR              reduce using rule 18 (type -> CHAR .)
-    RPAREN          reduce using rule 18 (type -> CHAR .)
+    ID              reduce using rule 22 (type -> FLOAT .)
+    MAIOR           reduce using rule 22 (type -> FLOAT .)
+    MENOR           reduce using rule 22 (type -> FLOAT .)
+    MAIOREQUALS     reduce using rule 22 (type -> FLOAT .)
+    MENOREQUALS     reduce using rule 22 (type -> FLOAT .)
+    EQUALS          reduce using rule 22 (type -> FLOAT .)
+    DIFF            reduce using rule 22 (type -> FLOAT .)
+    AND             reduce using rule 22 (type -> FLOAT .)
+    OR              reduce using rule 22 (type -> FLOAT .)
+    RPAREN          reduce using rule 22 (type -> FLOAT .)
 
 
 state 9
 
-    (6) statement_if -> IF . LPAREN expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> IF . LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (23) type -> CHAR .
 
-    LPAREN          shift and go to state 13
+    ID              reduce using rule 23 (type -> CHAR .)
+    MAIOR           reduce using rule 23 (type -> CHAR .)
+    MENOR           reduce using rule 23 (type -> CHAR .)
+    MAIOREQUALS     reduce using rule 23 (type -> CHAR .)
+    MENOREQUALS     reduce using rule 23 (type -> CHAR .)
+    EQUALS          reduce using rule 23 (type -> CHAR .)
+    DIFF            reduce using rule 23 (type -> CHAR .)
+    AND             reduce using rule 23 (type -> CHAR .)
+    OR              reduce using rule 23 (type -> CHAR .)
+    RPAREN          reduce using rule 23 (type -> CHAR .)
 
 
 state 10
+
+    (7) statement_if -> IF . LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> IF . LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+
+    LPAREN          shift and go to state 15
+
+
+state 11
+
+    (9) statement_switch -> SWITCH . LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
+
+    LPAREN          shift and go to state 16
+
+
+state 12
 
     (2) sequence_declaration -> declaration sequence_declaration .
 
     $end            reduce using rule 2 (sequence_declaration -> declaration sequence_declaration .)
 
 
-state 11
-
-    (4) declaration -> type variavel . define_end_of_instruction
-    (26) define_end_of_instruction -> . SEMICOLON
-
-    SEMICOLON       shift and go to state 15
-
-    define_end_of_instruction      shift and go to state 14
-
-state 12
-
-    (24) variavel -> ID .
-    (25) variavel -> ID . COMMA variavel
-
-    SEMICOLON       reduce using rule 24 (variavel -> ID .)
-    COMMA           shift and go to state 16
-
-
 state 13
 
-    (6) statement_if -> IF LPAREN . expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> IF LPAREN . expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
-    (8) expression -> . condition MAIOR condition
-    (9) expression -> . condition MENOR condition
-    (10) expression -> . condition MAIOREQUALS condition
-    (11) expression -> . condition MENOREQUALS condition
-    (12) expression -> . condition EQUALS condition
-    (13) expression -> . condition DIFF condition
-    (14) expression -> . condition AND condition
-    (15) expression -> . condition OR condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (4) declaration -> type variavel . define_end_of_instruction
+    (31) define_end_of_instruction -> . SEMICOLON
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    SEMICOLON       shift and go to state 18
 
-    expression                     shift and go to state 17
-    condition                      shift and go to state 18
-    type                           shift and go to state 19
-    value                          shift and go to state 20
+    define_end_of_instruction      shift and go to state 17
 
 state 14
+
+    (29) variavel -> ID .
+    (30) variavel -> ID . COMMA variavel
+
+    SEMICOLON       reduce using rule 29 (variavel -> ID .)
+    COMMA           shift and go to state 19
+
+
+state 15
+
+    (7) statement_if -> IF LPAREN . expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> IF LPAREN . expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (13) expression -> . condition MAIOR condition
+    (14) expression -> . condition MENOR condition
+    (15) expression -> . condition MAIOREQUALS condition
+    (16) expression -> . condition MENOREQUALS condition
+    (17) expression -> . condition EQUALS condition
+    (18) expression -> . condition DIFF condition
+    (19) expression -> . condition AND condition
+    (20) expression -> . condition OR condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
+
+    expression                     shift and go to state 20
+    condition                      shift and go to state 21
+    type                           shift and go to state 22
+    value                          shift and go to state 23
+
+state 16
+
+    (9) statement_switch -> SWITCH LPAREN . ID RPAREN LBRACE define_cases define_default RBRACE
+
+    ID              shift and go to state 27
+
+
+state 17
 
     (4) declaration -> type variavel define_end_of_instruction .
 
@@ -312,476 +355,728 @@ state 14
     FLOAT           reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
     CHAR            reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
     IF              reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
+    SWITCH          reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
     $end            reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
     RBRACE          reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
-
-
-state 15
-
-    (26) define_end_of_instruction -> SEMICOLON .
-
-    INT             reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-    FLOAT           reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-    CHAR            reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-    IF              reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-    $end            reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-    RBRACE          reduce using rule 26 (define_end_of_instruction -> SEMICOLON .)
-
-
-state 16
-
-    (25) variavel -> ID COMMA . variavel
-    (24) variavel -> . ID
-    (25) variavel -> . ID COMMA variavel
-
-    ID              shift and go to state 12
-
-    variavel                       shift and go to state 24
-
-state 17
-
-    (6) statement_if -> IF LPAREN expression . RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> IF LPAREN expression . RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
-
-    RPAREN          shift and go to state 25
+    BREAK           reduce using rule 4 (declaration -> type variavel define_end_of_instruction .)
 
 
 state 18
 
-    (8) expression -> condition . MAIOR condition
-    (9) expression -> condition . MENOR condition
-    (10) expression -> condition . MAIOREQUALS condition
-    (11) expression -> condition . MENOREQUALS condition
-    (12) expression -> condition . EQUALS condition
-    (13) expression -> condition . DIFF condition
-    (14) expression -> condition . AND condition
-    (15) expression -> condition . OR condition
+    (31) define_end_of_instruction -> SEMICOLON .
 
-    MAIOR           shift and go to state 26
-    MENOR           shift and go to state 27
-    MAIOREQUALS     shift and go to state 28
-    MENOREQUALS     shift and go to state 29
-    EQUALS          shift and go to state 30
-    DIFF            shift and go to state 31
-    AND             shift and go to state 32
-    OR              shift and go to state 33
+    INT             reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    FLOAT           reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    CHAR            reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    IF              reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    SWITCH          reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    $end            reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    RBRACE          reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
+    BREAK           reduce using rule 31 (define_end_of_instruction -> SEMICOLON .)
 
 
 state 19
 
-    (22) condition -> type .
+    (30) variavel -> ID COMMA . variavel
+    (29) variavel -> . ID
+    (30) variavel -> . ID COMMA variavel
 
-    MAIOR           reduce using rule 22 (condition -> type .)
-    MENOR           reduce using rule 22 (condition -> type .)
-    MAIOREQUALS     reduce using rule 22 (condition -> type .)
-    MENOREQUALS     reduce using rule 22 (condition -> type .)
-    EQUALS          reduce using rule 22 (condition -> type .)
-    DIFF            reduce using rule 22 (condition -> type .)
-    AND             reduce using rule 22 (condition -> type .)
-    OR              reduce using rule 22 (condition -> type .)
-    RPAREN          reduce using rule 22 (condition -> type .)
+    ID              shift and go to state 14
 
+    variavel                       shift and go to state 28
 
 state 20
 
-    (23) condition -> value .
+    (7) statement_if -> IF LPAREN expression . RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> IF LPAREN expression . RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
 
-    MAIOR           reduce using rule 23 (condition -> value .)
-    MENOR           reduce using rule 23 (condition -> value .)
-    MAIOREQUALS     reduce using rule 23 (condition -> value .)
-    MENOREQUALS     reduce using rule 23 (condition -> value .)
-    EQUALS          reduce using rule 23 (condition -> value .)
-    DIFF            reduce using rule 23 (condition -> value .)
-    AND             reduce using rule 23 (condition -> value .)
-    OR              reduce using rule 23 (condition -> value .)
-    RPAREN          reduce using rule 23 (condition -> value .)
+    RPAREN          shift and go to state 29
 
 
 state 21
 
-    (19) value -> NUMBER .
+    (13) expression -> condition . MAIOR condition
+    (14) expression -> condition . MENOR condition
+    (15) expression -> condition . MAIOREQUALS condition
+    (16) expression -> condition . MENOREQUALS condition
+    (17) expression -> condition . EQUALS condition
+    (18) expression -> condition . DIFF condition
+    (19) expression -> condition . AND condition
+    (20) expression -> condition . OR condition
 
-    MAIOR           reduce using rule 19 (value -> NUMBER .)
-    MENOR           reduce using rule 19 (value -> NUMBER .)
-    MAIOREQUALS     reduce using rule 19 (value -> NUMBER .)
-    MENOREQUALS     reduce using rule 19 (value -> NUMBER .)
-    EQUALS          reduce using rule 19 (value -> NUMBER .)
-    DIFF            reduce using rule 19 (value -> NUMBER .)
-    AND             reduce using rule 19 (value -> NUMBER .)
-    OR              reduce using rule 19 (value -> NUMBER .)
-    RPAREN          reduce using rule 19 (value -> NUMBER .)
+    MAIOR           shift and go to state 30
+    MENOR           shift and go to state 31
+    MAIOREQUALS     shift and go to state 32
+    MENOREQUALS     shift and go to state 33
+    EQUALS          shift and go to state 34
+    DIFF            shift and go to state 35
+    AND             shift and go to state 36
+    OR              shift and go to state 37
 
 
 state 22
 
-    (20) value -> DECIMAL .
+    (27) condition -> type .
 
-    MAIOR           reduce using rule 20 (value -> DECIMAL .)
-    MENOR           reduce using rule 20 (value -> DECIMAL .)
-    MAIOREQUALS     reduce using rule 20 (value -> DECIMAL .)
-    MENOREQUALS     reduce using rule 20 (value -> DECIMAL .)
-    EQUALS          reduce using rule 20 (value -> DECIMAL .)
-    DIFF            reduce using rule 20 (value -> DECIMAL .)
-    AND             reduce using rule 20 (value -> DECIMAL .)
-    OR              reduce using rule 20 (value -> DECIMAL .)
-    RPAREN          reduce using rule 20 (value -> DECIMAL .)
+    MAIOR           reduce using rule 27 (condition -> type .)
+    MENOR           reduce using rule 27 (condition -> type .)
+    MAIOREQUALS     reduce using rule 27 (condition -> type .)
+    MENOREQUALS     reduce using rule 27 (condition -> type .)
+    EQUALS          reduce using rule 27 (condition -> type .)
+    DIFF            reduce using rule 27 (condition -> type .)
+    AND             reduce using rule 27 (condition -> type .)
+    OR              reduce using rule 27 (condition -> type .)
+    RPAREN          reduce using rule 27 (condition -> type .)
 
 
 state 23
 
-    (21) value -> STRING .
+    (28) condition -> value .
 
-    MAIOR           reduce using rule 21 (value -> STRING .)
-    MENOR           reduce using rule 21 (value -> STRING .)
-    MAIOREQUALS     reduce using rule 21 (value -> STRING .)
-    MENOREQUALS     reduce using rule 21 (value -> STRING .)
-    EQUALS          reduce using rule 21 (value -> STRING .)
-    DIFF            reduce using rule 21 (value -> STRING .)
-    AND             reduce using rule 21 (value -> STRING .)
-    OR              reduce using rule 21 (value -> STRING .)
-    RPAREN          reduce using rule 21 (value -> STRING .)
+    MAIOR           reduce using rule 28 (condition -> value .)
+    MENOR           reduce using rule 28 (condition -> value .)
+    MAIOREQUALS     reduce using rule 28 (condition -> value .)
+    MENOREQUALS     reduce using rule 28 (condition -> value .)
+    EQUALS          reduce using rule 28 (condition -> value .)
+    DIFF            reduce using rule 28 (condition -> value .)
+    AND             reduce using rule 28 (condition -> value .)
+    OR              reduce using rule 28 (condition -> value .)
+    RPAREN          reduce using rule 28 (condition -> value .)
 
 
 state 24
 
-    (25) variavel -> ID COMMA variavel .
+    (24) value -> NUMBER .
 
-    SEMICOLON       reduce using rule 25 (variavel -> ID COMMA variavel .)
+    MAIOR           reduce using rule 24 (value -> NUMBER .)
+    MENOR           reduce using rule 24 (value -> NUMBER .)
+    MAIOREQUALS     reduce using rule 24 (value -> NUMBER .)
+    MENOREQUALS     reduce using rule 24 (value -> NUMBER .)
+    EQUALS          reduce using rule 24 (value -> NUMBER .)
+    DIFF            reduce using rule 24 (value -> NUMBER .)
+    AND             reduce using rule 24 (value -> NUMBER .)
+    OR              reduce using rule 24 (value -> NUMBER .)
+    RPAREN          reduce using rule 24 (value -> NUMBER .)
+    COLON           reduce using rule 24 (value -> NUMBER .)
 
 
 state 25
 
-    (6) statement_if -> IF LPAREN expression RPAREN . LBRACE declaration RBRACE
-    (7) statement_if -> IF LPAREN expression RPAREN . LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (25) value -> DECIMAL .
 
-    LBRACE          shift and go to state 34
+    MAIOR           reduce using rule 25 (value -> DECIMAL .)
+    MENOR           reduce using rule 25 (value -> DECIMAL .)
+    MAIOREQUALS     reduce using rule 25 (value -> DECIMAL .)
+    MENOREQUALS     reduce using rule 25 (value -> DECIMAL .)
+    EQUALS          reduce using rule 25 (value -> DECIMAL .)
+    DIFF            reduce using rule 25 (value -> DECIMAL .)
+    AND             reduce using rule 25 (value -> DECIMAL .)
+    OR              reduce using rule 25 (value -> DECIMAL .)
+    RPAREN          reduce using rule 25 (value -> DECIMAL .)
+    COLON           reduce using rule 25 (value -> DECIMAL .)
 
 
 state 26
 
-    (8) expression -> condition MAIOR . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (26) value -> STRING .
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    MAIOR           reduce using rule 26 (value -> STRING .)
+    MENOR           reduce using rule 26 (value -> STRING .)
+    MAIOREQUALS     reduce using rule 26 (value -> STRING .)
+    MENOREQUALS     reduce using rule 26 (value -> STRING .)
+    EQUALS          reduce using rule 26 (value -> STRING .)
+    DIFF            reduce using rule 26 (value -> STRING .)
+    AND             reduce using rule 26 (value -> STRING .)
+    OR              reduce using rule 26 (value -> STRING .)
+    RPAREN          reduce using rule 26 (value -> STRING .)
+    COLON           reduce using rule 26 (value -> STRING .)
 
-    condition                      shift and go to state 35
-    type                           shift and go to state 19
-    value                          shift and go to state 20
 
 state 27
 
-    (9) expression -> condition MENOR . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (9) statement_switch -> SWITCH LPAREN ID . RPAREN LBRACE define_cases define_default RBRACE
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    RPAREN          shift and go to state 38
 
-    condition                      shift and go to state 36
-    type                           shift and go to state 19
-    value                          shift and go to state 20
 
 state 28
 
-    (10) expression -> condition MAIOREQUALS . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (30) variavel -> ID COMMA variavel .
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    SEMICOLON       reduce using rule 30 (variavel -> ID COMMA variavel .)
 
-    condition                      shift and go to state 37
-    type                           shift and go to state 19
-    value                          shift and go to state 20
 
 state 29
 
-    (11) expression -> condition MENOREQUALS . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (7) statement_if -> IF LPAREN expression RPAREN . LBRACE declaration RBRACE
+    (8) statement_if -> IF LPAREN expression RPAREN . LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    LBRACE          shift and go to state 39
 
-    condition                      shift and go to state 38
-    type                           shift and go to state 19
-    value                          shift and go to state 20
 
 state 30
 
-    (12) expression -> condition EQUALS . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (13) expression -> condition MAIOR . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
-    condition                      shift and go to state 39
-    type                           shift and go to state 19
-    value                          shift and go to state 20
+    condition                      shift and go to state 40
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 31
 
-    (13) expression -> condition DIFF . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (14) expression -> condition MENOR . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
-    condition                      shift and go to state 40
-    type                           shift and go to state 19
-    value                          shift and go to state 20
+    condition                      shift and go to state 41
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 32
 
-    (14) expression -> condition AND . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (15) expression -> condition MAIOREQUALS . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
-    condition                      shift and go to state 41
-    type                           shift and go to state 19
-    value                          shift and go to state 20
+    condition                      shift and go to state 42
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 33
 
-    (15) expression -> condition OR . condition
-    (22) condition -> . type
-    (23) condition -> . value
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (19) value -> . NUMBER
-    (20) value -> . DECIMAL
-    (21) value -> . STRING
+    (16) expression -> condition MENOREQUALS . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    NUMBER          shift and go to state 21
-    DECIMAL         shift and go to state 22
-    STRING          shift and go to state 23
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
-    condition                      shift and go to state 42
-    type                           shift and go to state 19
-    value                          shift and go to state 20
+    condition                      shift and go to state 43
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 34
 
-    (6) statement_if -> IF LPAREN expression RPAREN LBRACE . declaration RBRACE
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE . declaration RBRACE ELSE LBRACE declaration RBRACE
-    (4) declaration -> . type variavel define_end_of_instruction
-    (5) declaration -> . statement_if
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (6) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (17) expression -> condition EQUALS . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    IF              shift and go to state 9
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
-    declaration                    shift and go to state 43
-    type                           shift and go to state 4
-    statement_if                   shift and go to state 5
+    condition                      shift and go to state 44
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 35
 
-    (8) expression -> condition MAIOR condition .
+    (18) expression -> condition DIFF . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    RPAREN          reduce using rule 8 (expression -> condition MAIOR condition .)
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
+    condition                      shift and go to state 45
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 36
 
-    (9) expression -> condition MENOR condition .
+    (19) expression -> condition AND . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    RPAREN          reduce using rule 9 (expression -> condition MENOR condition .)
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
+    condition                      shift and go to state 46
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 37
 
-    (10) expression -> condition MAIOREQUALS condition .
+    (20) expression -> condition OR . condition
+    (27) condition -> . type
+    (28) condition -> . value
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
 
-    RPAREN          reduce using rule 10 (expression -> condition MAIOREQUALS condition .)
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
 
+    condition                      shift and go to state 47
+    type                           shift and go to state 22
+    value                          shift and go to state 23
 
 state 38
 
-    (11) expression -> condition MENOREQUALS condition .
+    (9) statement_switch -> SWITCH LPAREN ID RPAREN . LBRACE define_cases define_default RBRACE
 
-    RPAREN          reduce using rule 11 (expression -> condition MENOREQUALS condition .)
+    LBRACE          shift and go to state 48
 
 
 state 39
 
-    (12) expression -> condition EQUALS condition .
+    (7) statement_if -> IF LPAREN expression RPAREN LBRACE . declaration RBRACE
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE . declaration RBRACE ELSE LBRACE declaration RBRACE
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) declaration -> . statement_if
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
 
-    RPAREN          reduce using rule 12 (expression -> condition EQUALS condition .)
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
 
+    declaration                    shift and go to state 49
+    type                           shift and go to state 4
+    statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
 
 state 40
 
-    (13) expression -> condition DIFF condition .
+    (13) expression -> condition MAIOR condition .
 
-    RPAREN          reduce using rule 13 (expression -> condition DIFF condition .)
+    RPAREN          reduce using rule 13 (expression -> condition MAIOR condition .)
 
 
 state 41
 
-    (14) expression -> condition AND condition .
+    (14) expression -> condition MENOR condition .
 
-    RPAREN          reduce using rule 14 (expression -> condition AND condition .)
+    RPAREN          reduce using rule 14 (expression -> condition MENOR condition .)
 
 
 state 42
 
-    (15) expression -> condition OR condition .
+    (15) expression -> condition MAIOREQUALS condition .
 
-    RPAREN          reduce using rule 15 (expression -> condition OR condition .)
+    RPAREN          reduce using rule 15 (expression -> condition MAIOREQUALS condition .)
 
 
 state 43
 
-    (6) statement_if -> IF LPAREN expression RPAREN LBRACE declaration . RBRACE
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration . RBRACE ELSE LBRACE declaration RBRACE
+    (16) expression -> condition MENOREQUALS condition .
 
-    RBRACE          shift and go to state 44
+    RPAREN          reduce using rule 16 (expression -> condition MENOREQUALS condition .)
 
 
 state 44
 
-    (6) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE . ELSE LBRACE declaration RBRACE
+    (17) expression -> condition EQUALS condition .
 
-    INT             reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    FLOAT           reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    CHAR            reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    IF              reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    $end            reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    RBRACE          reduce using rule 6 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
-    ELSE            shift and go to state 45
+    RPAREN          reduce using rule 17 (expression -> condition EQUALS condition .)
 
 
 state 45
 
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE . LBRACE declaration RBRACE
+    (18) expression -> condition DIFF condition .
 
-    LBRACE          shift and go to state 46
+    RPAREN          reduce using rule 18 (expression -> condition DIFF condition .)
 
 
 state 46
 
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE . declaration RBRACE
-    (4) declaration -> . type variavel define_end_of_instruction
-    (5) declaration -> . statement_if
-    (16) type -> . INT
-    (17) type -> . FLOAT
-    (18) type -> . CHAR
-    (6) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
-    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (19) expression -> condition AND condition .
 
-    INT             shift and go to state 6
-    FLOAT           shift and go to state 7
-    CHAR            shift and go to state 8
-    IF              shift and go to state 9
+    RPAREN          reduce using rule 19 (expression -> condition AND condition .)
 
-    declaration                    shift and go to state 47
-    type                           shift and go to state 4
-    statement_if                   shift and go to state 5
 
 state 47
 
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration . RBRACE
+    (20) expression -> condition OR condition .
 
-    RBRACE          shift and go to state 48
+    RPAREN          reduce using rule 20 (expression -> condition OR condition .)
 
 
 state 48
 
-    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .
+    (9) statement_switch -> SWITCH LPAREN ID RPAREN LBRACE . define_cases define_default RBRACE
+    (10) define_cases -> . CASE value COLON LBRACE declaration define_break RBRACE define_default
+    (11) define_cases -> . CASE value COLON LBRACE declaration define_break RBRACE define_cases
 
-    INT             reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
-    FLOAT           reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
-    CHAR            reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
-    IF              reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
-    $end            reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
-    RBRACE          reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    CASE            shift and go to state 51
+
+    define_cases                   shift and go to state 50
+
+state 49
+
+    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration . RBRACE
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration . RBRACE ELSE LBRACE declaration RBRACE
+
+    RBRACE          shift and go to state 52
+
+
+state 50
+
+    (9) statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases . define_default RBRACE
+    (12) define_default -> . DEFAULT COLON LBRACE declaration define_break RBRACE
+
+    DEFAULT         shift and go to state 54
+
+    define_default                 shift and go to state 53
+
+state 51
+
+    (10) define_cases -> CASE . value COLON LBRACE declaration define_break RBRACE define_default
+    (11) define_cases -> CASE . value COLON LBRACE declaration define_break RBRACE define_cases
+    (24) value -> . NUMBER
+    (25) value -> . DECIMAL
+    (26) value -> . STRING
+
+    NUMBER          shift and go to state 24
+    DECIMAL         shift and go to state 25
+    STRING          shift and go to state 26
+
+    value                          shift and go to state 55
+
+state 52
+
+    (7) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE . ELSE LBRACE declaration RBRACE
+
+    INT             reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    FLOAT           reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    CHAR            reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    IF              reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    SWITCH          reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    $end            reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    RBRACE          reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    BREAK           reduce using rule 7 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE .)
+    ELSE            shift and go to state 56
+
+
+state 53
+
+    (9) statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default . RBRACE
+
+    RBRACE          shift and go to state 57
+
+
+state 54
+
+    (12) define_default -> DEFAULT . COLON LBRACE declaration define_break RBRACE
+
+    COLON           shift and go to state 58
+
+
+state 55
+
+    (10) define_cases -> CASE value . COLON LBRACE declaration define_break RBRACE define_default
+    (11) define_cases -> CASE value . COLON LBRACE declaration define_break RBRACE define_cases
+
+    COLON           shift and go to state 59
+
+
+state 56
+
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE . LBRACE declaration RBRACE
+
+    LBRACE          shift and go to state 60
+
+
+state 57
+
+    (9) statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .
+
+    INT             reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    FLOAT           reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    CHAR            reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    IF              reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    SWITCH          reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    $end            reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    RBRACE          reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+    BREAK           reduce using rule 9 (statement_switch -> SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE .)
+
+
+state 58
+
+    (12) define_default -> DEFAULT COLON . LBRACE declaration define_break RBRACE
+
+    LBRACE          shift and go to state 61
+
+
+state 59
+
+    (10) define_cases -> CASE value COLON . LBRACE declaration define_break RBRACE define_default
+    (11) define_cases -> CASE value COLON . LBRACE declaration define_break RBRACE define_cases
+
+    LBRACE          shift and go to state 62
+
+
+state 60
+
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE . declaration RBRACE
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) declaration -> . statement_if
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
+
+    declaration                    shift and go to state 63
+    type                           shift and go to state 4
+    statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
+
+state 61
+
+    (12) define_default -> DEFAULT COLON LBRACE . declaration define_break RBRACE
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) declaration -> . statement_if
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
+
+    declaration                    shift and go to state 64
+    type                           shift and go to state 4
+    statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
+
+state 62
+
+    (10) define_cases -> CASE value COLON LBRACE . declaration define_break RBRACE define_default
+    (11) define_cases -> CASE value COLON LBRACE . declaration define_break RBRACE define_cases
+    (4) declaration -> . type variavel define_end_of_instruction
+    (5) declaration -> . statement_if
+    (6) declaration -> . statement_switch
+    (21) type -> . INT
+    (22) type -> . FLOAT
+    (23) type -> . CHAR
+    (7) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE
+    (8) statement_if -> . IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE
+    (9) statement_switch -> . SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    CHAR            shift and go to state 9
+    IF              shift and go to state 10
+    SWITCH          shift and go to state 11
+
+    declaration                    shift and go to state 65
+    type                           shift and go to state 4
+    statement_if                   shift and go to state 5
+    statement_switch               shift and go to state 6
+
+state 63
+
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration . RBRACE
+
+    RBRACE          shift and go to state 66
+
+
+state 64
+
+    (12) define_default -> DEFAULT COLON LBRACE declaration . define_break RBRACE
+    (32) define_break -> . BREAK define_end_of_instruction
+
+    BREAK           shift and go to state 68
+
+    define_break                   shift and go to state 67
+
+state 65
+
+    (10) define_cases -> CASE value COLON LBRACE declaration . define_break RBRACE define_default
+    (11) define_cases -> CASE value COLON LBRACE declaration . define_break RBRACE define_cases
+    (32) define_break -> . BREAK define_end_of_instruction
+
+    BREAK           shift and go to state 68
+
+    define_break                   shift and go to state 69
+
+state 66
+
+    (8) statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .
+
+    INT             reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    FLOAT           reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    CHAR            reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    IF              reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    SWITCH          reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    $end            reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    RBRACE          reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+    BREAK           reduce using rule 8 (statement_if -> IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE .)
+
+
+state 67
+
+    (12) define_default -> DEFAULT COLON LBRACE declaration define_break . RBRACE
+
+    RBRACE          shift and go to state 70
+
+
+state 68
+
+    (32) define_break -> BREAK . define_end_of_instruction
+    (31) define_end_of_instruction -> . SEMICOLON
+
+    SEMICOLON       shift and go to state 18
+
+    define_end_of_instruction      shift and go to state 71
+
+state 69
+
+    (10) define_cases -> CASE value COLON LBRACE declaration define_break . RBRACE define_default
+    (11) define_cases -> CASE value COLON LBRACE declaration define_break . RBRACE define_cases
+
+    RBRACE          shift and go to state 72
+
+
+state 70
+
+    (12) define_default -> DEFAULT COLON LBRACE declaration define_break RBRACE .
+
+    RBRACE          reduce using rule 12 (define_default -> DEFAULT COLON LBRACE declaration define_break RBRACE .)
+    DEFAULT         reduce using rule 12 (define_default -> DEFAULT COLON LBRACE declaration define_break RBRACE .)
+
+
+state 71
+
+    (32) define_break -> BREAK define_end_of_instruction .
+
+    RBRACE          reduce using rule 32 (define_break -> BREAK define_end_of_instruction .)
+
+
+state 72
+
+    (10) define_cases -> CASE value COLON LBRACE declaration define_break RBRACE . define_default
+    (11) define_cases -> CASE value COLON LBRACE declaration define_break RBRACE . define_cases
+    (12) define_default -> . DEFAULT COLON LBRACE declaration define_break RBRACE
+    (10) define_cases -> . CASE value COLON LBRACE declaration define_break RBRACE define_default
+    (11) define_cases -> . CASE value COLON LBRACE declaration define_break RBRACE define_cases
+
+    DEFAULT         shift and go to state 54
+    CASE            shift and go to state 51
+
+    define_default                 shift and go to state 73
+    define_cases                   shift and go to state 74
+
+state 73
+
+    (10) define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_default .
+
+    DEFAULT         reduce using rule 10 (define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_default .)
+
+
+state 74
+
+    (11) define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_cases .
+
+    DEFAULT         reduce using rule 11 (define_cases -> CASE value COLON LBRACE declaration define_break RBRACE define_cases .)
 

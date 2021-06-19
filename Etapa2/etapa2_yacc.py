@@ -26,13 +26,30 @@ def p_sequence_declaration(t):
 
 def p_declaration(t):
     '''declaration  : type variavel define_end_of_instruction
-                    | statement_if'''
+                    | statement_if
+                    | statement_switch'''
     t[0]=t[1]
 
 def p_statement_if(t):
     '''statement_if : IF LPAREN expression RPAREN LBRACE declaration RBRACE
                     | IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE''' 
+    if(t[3]):
+        t[0]=t[6]
+    else:
+        if(len(t)>10): #with else
+            t[0]=t[10]
+
+def p_statement_switch(t):
+    '''statement_switch : SWITCH LPAREN ID RPAREN LBRACE define_cases define_default RBRACE''' 
     t[0]=t[1]
+
+def p_define_cases(t):
+    '''define_cases : CASE value COLON LBRACE declaration define_break RBRACE define_default
+                    | CASE value COLON LBRACE declaration define_break RBRACE define_cases''' 
+    t[0]=t[1]
+
+def p_define_default(t):
+    '''define_default : DEFAULT COLON LBRACE declaration define_break RBRACE'''
 
 def p_expression(t):
     '''expression : condition MAIOR condition
@@ -77,6 +94,9 @@ def p_variavel(t):
     
 def p_define_end_of_instruction(p):
     'define_end_of_instruction : SEMICOLON'
+
+def p_define_break(t):
+    'define_break : BREAK define_end_of_instruction'
 
 # Error rule for syntax errors
 def p_error(p):
