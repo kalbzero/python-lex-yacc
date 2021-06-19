@@ -4,9 +4,10 @@
 import ply.yacc as yacc
 import declarations
 from declarations import *
+import errors
  
 # Get the token map from the lexer.  This is required.
-from etapa1_lex import tokens
+from etapa2_lex import tokens
 
 GLOBAL="GLOBAL"
 var_global = Escopo(GLOBAL)
@@ -24,13 +25,49 @@ def p_sequence_declaration(t):
     t[0]=t[1]
 
 def p_declaration(t):
-    '''declaration  : type variavel define_end_of_instruction'''
+    '''declaration  : type variavel define_end_of_instruction
+                    | statement_if'''
     t[0]=t[1]
+
+def p_statement_if(t):
+    '''statement_if : IF LPAREN expression RPAREN LBRACE declaration RBRACE
+                    | IF LPAREN expression RPAREN LBRACE declaration RBRACE ELSE LBRACE declaration RBRACE''' 
+    t[0]=t[1]
+
+def p_expression(t):
+    '''expression : condition MAIOR condition
+                  | condition MENOR condition
+                  | condition MAIOREQUALS condition
+                  | condition MENOREQUALS condition
+                  | condition EQUALS condition
+                  | condition DIFF condition
+                  | condition AND condition
+                  | condition OR condition'''
+    if t[2] == '>'  : t[0] = t[1] > t[3]
+    elif t[2] == '<': t[0] = t[1] < t[3]
+    elif t[2] == '>=': t[0] = t[1] >= t[3]
+    elif t[2] == '<=': t[0] = t[1] <= t[3]
+    elif t[2] == '==': t[0] = t[1] == t[3]
+    elif t[2] == '!=': t[0] = t[1] != t[3]
+    elif t[2] == '&&': t[0] = t[1] and t[3]
+    elif t[2] == '||': t[0] = t[1] or t[3]
+    else: errors.unknownSignal(t)
 
 def p_define_type(t):
     '''type : INT
             | FLOAT
             | CHAR'''
+    t[0]=t[1]
+
+def p_define_value(t):
+    '''value : NUMBER
+            | DECIMAL
+            | STRING'''
+    t[0]=t[1]
+
+def p_define_condition(t):
+    '''condition : type
+                 | value'''
     t[0]=t[1]
 
 def p_variavel(t):
