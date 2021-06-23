@@ -1,8 +1,0 @@
-Gramática
-
-- As variáveis não possuem uma regra para tamanho ou limite, ou seja, é livre (desde que não estoure a memória do computador kkkk)
-- As variaveis começam por letras ou _
-- Os tipos de variaveis reconhecidas sao: float, int e char
-- Pode declarar várias variaveis, separado elas por vírgula (Ex: int number, age, days;)
-- Nessa etapa não será possível inicializar ou colocar valores dentro das variáveis
-- A finalização de cada declaração será por ponto-e-vírgula (;)

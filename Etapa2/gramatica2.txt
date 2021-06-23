@@ -1,0 +1,15 @@
+Gramática Etapa 2
+
+G = ( V, T, P, S)
+V = {S}
+T = { and, assign, break, case, char, colon, comma, decimal, default, diff, divide, divideequals, else, equals, explamation, float, id, if, int, lbrace, lparen, maior, maiorequals, menor, menorequals, minus, minusequals, number, or, plus, rbrace, rparen, semicolon, string, sumequals, switch, times, timesequals}
+P = {
+    <S> ::= <PROGRAM>
+    <PROGRAM> ::= <SEQUENCE_DECLARATION>
+    <SEQUENCE_DECLARATION> ::= <DECLARATION>
+    <DECLARATION> ::= <TYPE> <VARIAVEL> <DEFINE_END_OF_INSTRUCTION> | <STATEMENT_IF> | <STATEMENT_SWITCH>
+    <TYPE> ::= char | float | int
+    <VARIAVEL> ::= id | id comma <VARIAVEL>
+    <DEFINE_END_OF_INSTRUCTION> ::= semicolon
+    <STATEMENT_IF> ::= 
+}

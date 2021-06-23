@@ -1,0 +1,14 @@
+Gramática Etapa 1
+
+G = ( V, T, P, S)
+V = {S}
+T = {char, comma, float, id, int, semicolon, error}
+P = {
+    <S> ::= <PROGRAM>
+    <PROGRAM> ::= <SEQUENCE_DECLARATION>
+    <SEQUENCE_DECLARATION> ::= <DECLARATION>
+    <DECLARATION> ::= <TYPE> <VARIAVEL> <DEFINE_END_OF_INSTRUCTION>
+    <TYPE> ::= char | float | int
+    <VARIAVEL> ::= id | id comma <VARIAVEL>
+    <DEFINE_END_OF_INSTRUCTION> ::= semicolon
+}
