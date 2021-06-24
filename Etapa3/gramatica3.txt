@@ -1,0 +1,22 @@
+Gramática Etapa 3
+
+P = {
+    <PROGRAM> ::= <SEQUENCE_DECLARATION>
+    <SEQUENCE_DECLARATION> ::= <DECLARATION>
+    <DECLARATION> ::= <TYPE> <VARIAVEL> <DEFINE_END_OF_INSTRUCTION> | <OP_MATH> | <STATEMENT_IF> | <STATEMENT_SWITCH> | <STATEMENT_WHILE> | <STATEMENT_FOR>
+    <TYPE> ::= char | float | int
+    <VARIAVEL> ::= id | id comma <VARIAVEL> | id assign <VALUE> | id assign <VALUE> comma <VARIAVEL>
+    <VALUE> :: = number | decimal | string
+    <DEFINE_END_OF_INSTRUCTION> ::= semicolon
+    <OP_MATH> ::= id assign id plus id <DEFINE_END_OF_INSTRUCTION> <OP_MATH> | id assign id minus id <DEFINE_END_OF_INSTRUCTION> <OP_MATH> | id assign id times id <DEFINE_END_OF_INSTRUCTION> <OP_MATH> | id assign id divide id <DEFINE_END_OF_INSTRUCTION> <OP_MATH> | id assign id plus id <DEFINE_END_OF_INSTRUCTION> | id assign id minus id <DEFINE_END_OF_INSTRUCTION> | id assign id times id <DEFINE_END_OF_INSTRUCTION> | id assign id divide id <DEFINE_END_OF_INSTRUCTION>
+    <STATEMENT_IF> ::= if lparen <EXPRESSION> rparen lbrace <DECLARATION> rbrace | if lparen <EXPRESSION> rparen lbrace <DECLARATION> rbrace else lbrace <DECLARATION> rbrace
+    <EXPRESSION> ::= <CONDITION> maior <CONDITION> | <CONDITION> menor <CONDITION> | <CONDITION> maiorequals <CONDITION> | <CONDITION> menorequals <CONDITION> | <CONDITION> equals <CONDITION> | <CONDITION> diff <CONDITION> | <CONDITION> and <CONDITION> | <CONDITION> or <CONDITION> | explamation<CONDITION> | <CONDITION>
+    <CONDITION> ::= id | <VALUE>
+    <STATEMENT_SWITCH> ::= switch lparen ID rparen lbrace <DEFINE_CASES> <DEFINE_DEFAULT> rbrace
+    <DEFINE_CASES> ::= CASE <VALUE> colon lbrace <DECLARATION> <DEFINE_BREAK> rbrace | CASE <VALUE> colon lbrace <DECLARATION> <DEFINE_BREAK> rbrace <DEFINE_CASES>
+    <DEFINE_DEFAULT> ::= default colon lbrace <DECLARATION> <DEFINE_BREAK> rbrace
+    <STATEMENT_WHILE> ::= while lparen <CONDITION> rparen lbrace <DECLARATION> rbrace
+    <STATEMENT_FOR> ::= for lparen <CONDITION_FOR> rparen lbrace <DECLARATION> rbrace
+    <CONDITION_FOR> ::= int id assign number <DEFINE_END_OF_INSTRUCTION> <EXPRESSION> <DEFINE_END_OF_INSTRUCTION> <ALTER_VALUE> <DEFINE_END_OF_INSTRUCTION>
+    <ALTER_VALUE> ::= id plus plus | plus plus id | id minus minus | minus minus id
+}

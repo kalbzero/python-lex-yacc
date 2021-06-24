@@ -21,6 +21,8 @@ tokens = (
     'CASE',
     'BREAK',
     'DEFAULT',
+    'FOR',
+    'WHILE',
     'RPAREN',
     'LPAREN',
     'RBRACE',
@@ -92,6 +94,8 @@ reserved = {
     'case'   : 'CASE',
     'break'  : 'BREAK',
     'default': 'DEFAULT',
+    'for'    : 'FOR',
+    'while'  : 'WHILE'
 }
 
 # Regra para identificar números decimais
@@ -170,22 +174,42 @@ lexer = lex.lex()
 # '''
 
 #1.4 - reconhecer o comando switch com mais cases
-data = '''
-int option = 1;
-float result = 0;
+# data = '''
+# int option = 1;
+# float result = 0;
 
-switch(option){
-    case 1: {
-        result = 1;
-        break;
-    }
-    case 2: {
-        result = 2;
-        break;
-    }
-    default: {
-        result = 99;
-    }
+# switch(option){
+#     case 1: {
+#         result = 1;
+#         break;
+#     }
+#     case 2: {
+#         result = 2;
+#         break;
+#     }
+#     default: {
+#         result = 99;
+#     }
+# }
+# '''
+
+#1.5 - reconhecer o comando while
+# data = ''' 
+# int option = 1;
+# float result = 1;
+
+# while(option == 2){
+#     option = result + option;
+# }
+# '''
+
+#1.6 - reconhecer o comando for
+data = ''' 
+int option = 1;
+float result = 1;
+
+for(int i = 0; i < 10; i++){
+    option = result + option;
 }
 '''
 

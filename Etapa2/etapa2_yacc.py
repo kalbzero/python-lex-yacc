@@ -44,7 +44,7 @@ def p_statement_switch(t):
     t[0]=t[1]
 
 def p_define_cases(t):
-    '''define_cases : CASE value COLON LBRACE declaration define_break RBRACE define_default
+    '''define_cases : CASE value COLON LBRACE declaration define_break RBRACE
                     | CASE value COLON LBRACE declaration define_break RBRACE define_cases''' 
     t[0]=t[1]
 
@@ -78,18 +78,20 @@ def p_define_type(t):
 
 def p_define_value(t):
     '''value : NUMBER
-            | DECIMAL
-            | STRING'''
+             | DECIMAL
+             | STRING'''
     t[0]=t[1]
 
 def p_define_condition(t):
-    '''condition : type
+    '''condition : ID
                  | value'''
     t[0]=t[1]
 
 def p_variavel(t):
     '''variavel : ID
-                | ID COMMA variavel'''
+                | ID COMMA variavel
+                | ID ASSIGN value
+                | ID ASSIGN value COMMA variavel '''
     t[0] = t[1]
     
 def p_define_end_of_instruction(p):
